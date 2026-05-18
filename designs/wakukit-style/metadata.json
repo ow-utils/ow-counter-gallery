@@ -1,0 +1,12 @@
+{
+  "name": "Wakukit-style",
+  "slug": "wakukit-style",
+  "description": "角丸の白フレームに赤の「勝」と青の「敗」を並べたポップな勝敗カウンター。勝敗時には背景フラッシュと矢印アニメーションが流れます。wakukit-counter-free (https://wakukit.booth.pm/items/5947704) のデザインに着想を得た独自実装です。",
+  "author": "yukihane",
+  "author_url": "https://github.com/yukihane",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "tags": ["pop", "rounded", "japanese", "versus", "animated"],
+  "obs_size": { "width": 720, "height": 320 },
+  "created": "2026-05-19"
+}

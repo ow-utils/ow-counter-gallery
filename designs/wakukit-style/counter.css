@@ -1,0 +1,238 @@
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@800;900&family=Rammetto+One&display=swap");
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  overflow: hidden;
+}
+
+.wks-wrap {
+  display: inline-flex;
+  padding: 40px 60px;
+  font-family: "M PLUS Rounded 1c", "Rammetto One", sans-serif;
+}
+
+.wks-main {
+  position: relative;
+  border: 8px solid #202020;
+  border-radius: 54px;
+  background: linear-gradient(180deg, #ededed 0%, #ffffff 28%);
+  overflow: hidden;
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.15);
+}
+
+.wks-inner {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 18px;
+  padding: 14px 44px 20px;
+  min-width: 460px;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.wks-inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.7) 0, rgba(255, 255, 255, 0) 48%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ── sheen ── */
+.wks-sheen {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 3;
+}
+.wks-sheen::before,
+.wks-sheen::after {
+  content: "";
+  position: absolute;
+  top: -10%;
+  left: -75%;
+  width: 150px;
+  height: 120%;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.65) 100%);
+  transform: skewX(-25deg);
+  animation: wks-sheen 8s infinite;
+}
+.wks-sheen::after {
+  width: 70px;
+  animation: wks-sheen2 8s 0.3s infinite;
+}
+@keyframes wks-sheen {
+  45%, 100% { left: 125%; }
+}
+@keyframes wks-sheen2 {
+  35%, 100% { left: 125%; }
+}
+
+/* ── numbers and labels ── */
+.wks-number {
+  position: relative;
+  z-index: 4;
+  font-family: "M PLUS Rounded 1c", sans-serif;
+  font-weight: 900;
+  font-size: 128px;
+  line-height: 1;
+  color: #202020;
+  letter-spacing: -0.03em;
+  min-width: 80px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  will-change: transform;
+}
+
+.wks-label {
+  position: relative;
+  z-index: 4;
+  font-family: "M PLUS Rounded 1c", sans-serif;
+  font-weight: 900;
+  font-size: 56px;
+  line-height: 1;
+  padding: 6px 14px 8px;
+  border-radius: 16px;
+  border: 5px solid #202020;
+  color: #fff;
+  letter-spacing: 0.02em;
+  align-self: center;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.25);
+}
+
+.wks-label--win {
+  background: linear-gradient(180deg, #ff8a87 0%, #ee4f4b 100%);
+  box-shadow: 0 4px 0 #a02b28;
+}
+.wks-label--lose {
+  background: linear-gradient(180deg, #9ea3e0 0%, #5d62b8 100%);
+  box-shadow: 0 4px 0 #3a3e80;
+}
+
+/* ── animations: win / lose ── */
+.wks-anime {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  display: none;
+  overflow: hidden;
+}
+
+.wks-bg {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+.wks-anime--win .wks-bg {
+  background: linear-gradient(180deg, #ecacaa 0%, #f15753 100%);
+}
+.wks-anime--lose .wks-bg {
+  background: linear-gradient(180deg, #7b80d4 0%, #d2d5f0 100%);
+}
+
+.wks-lines {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+.wks-line {
+  display: block;
+  width: 18px;
+  height: 100%;
+  border-radius: 9px;
+  background: #fff;
+  box-shadow: 0 0 0 4px #202020 inset;
+}
+
+.wks-anime--win .wks-lines {
+  top: 100%;
+  transform: translateY(0);
+}
+.wks-anime--lose .wks-lines {
+  bottom: 100%;
+  top: auto;
+  transform: translateY(0);
+}
+
+.wks-arrow {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wks-arrow svg {
+  width: 38%;
+  height: auto;
+  max-width: 220px;
+  filter: drop-shadow(0 6px 0 rgba(0, 0, 0, 0.3));
+}
+.wks-anime--win .wks-arrow { transform: translateY(100%); }
+.wks-anime--lose .wks-arrow { transform: translateY(-100%); }
+
+@keyframes wks-bg-flash {
+  0%, 100% { opacity: 0; }
+  15%, 85% { opacity: 1; }
+}
+@keyframes wks-line-win {
+  0%, 10% { top: 100%; transform: translateY(0); }
+  100% { top: 0; transform: translateY(-100%); }
+}
+@keyframes wks-line-lose {
+  0%, 10% { bottom: 100%; transform: translateY(0); }
+  100% { bottom: 0; transform: translateY(100%); }
+}
+@keyframes wks-arrow-win {
+  0%, 20% { transform: translateY(100%); }
+  70%, 100% { transform: translateY(-100%); }
+}
+@keyframes wks-arrow-lose {
+  0%, 20% { transform: translateY(-100%); }
+  70%, 100% { transform: translateY(100%); }
+}
+
+.wks-wrap.win-anime .wks-anime--win,
+.wks-wrap.lose-anime .wks-anime--lose {
+  display: block;
+}
+
+.wks-wrap.win-anime .wks-anime--win .wks-bg,
+.wks-wrap.lose-anime .wks-anime--lose .wks-bg {
+  animation: wks-bg-flash 1.8s ease-out forwards;
+}
+
+.wks-wrap.win-anime .wks-anime--win .wks-lines {
+  animation: wks-line-win 1.5s ease-out forwards;
+}
+.wks-wrap.lose-anime .wks-anime--lose .wks-lines {
+  animation: wks-line-lose 1.5s ease-out forwards;
+}
+
+.wks-wrap.win-anime .wks-anime--win .wks-arrow {
+  animation: wks-arrow-win 1.8s ease-out forwards;
+}
+.wks-wrap.lose-anime .wks-anime--lose .wks-arrow {
+  animation: wks-arrow-lose 1.8s ease-out forwards;
+}
+
+/* ── number bump on update ── */
+.wks-number.is-bump {
+  animation: wks-bump 0.5s cubic-bezier(0.2, 1.2, 0.3, 1);
+}
+@keyframes wks-bump {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.25) rotate(-3deg); }
+  60% { transform: scale(0.92) rotate(2deg); }
+  100% { transform: scale(1); }
+}
