@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Counter Preview — Cyber VS</title>
+  <link rel="stylesheet" href="counter.css" />
+  <style>
+    body {
+      margin: 0;
+      background: #06030f;
+    }
+    .preview-controls {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding: 14px 24px;
+      border-radius: 14px;
+      background: rgba(12, 8, 32, 0.95);
+      border: 1px solid rgba(0, 245, 255, 0.35);
+      backdrop-filter: blur(12px);
+      font-family: system-ui, sans-serif;
+      z-index: 100;
+    }
+    .preview-controls button {
+      padding: 8px 18px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .preview-controls button:hover { opacity: 0.85; }
+    .btn-victory { background: #00f5ff; color: #06030f; }
+    .btn-defeat { background: #ff2bd6; color: #fff; }
+    .btn-reset { background: rgba(255,255,255,0.12); color: #ddd; }
+    .bg-selector {
+      display: flex;
+      gap: 6px;
+      margin-left: 12px;
+      padding-left: 12px;
+      border-left: 1px solid rgba(255,255,255,0.15);
+    }
+    .bg-selector button {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      border: 2px solid rgba(255,255,255,0.2);
+      padding: 0;
+      cursor: pointer;
+      font-size: 0;
+    }
+    .bg-selector button.active { border-color: #00f5ff; }
+    .bg-dark { background: #06030f; }
+    .bg-game1 { background: linear-gradient(135deg, #1a1040, #06030f); }
+    .bg-game2 { background: linear-gradient(135deg, #401040, #100608); }
+    .bg-bright { background: linear-gradient(135deg, #8090b0, #c0d0e8); }
+  </style>
+</head>
+<body>
+  <div class="arena-hud" data-hud-root>
+    <div class="ripple-layer" aria-hidden="true">
+      <span class="pulse-ring pulse-ring--a"></span>
+      <span class="pulse-ring pulse-ring--b"></span>
+    </div>
+    <div class="impact-flash" aria-hidden="true"></div>
+    <div class="impact-splash" aria-hidden="true"></div>
+    <div class="particle-host" aria-hidden="true"></div>
+    <article class="side side--win">
+      <div class="side-frame">
+        <p class="side-tag">WIN</p>
+        <div class="digit-cage">
+          <span class="mega-digit" data-counter="victories">0</span>
+          <span class="digit-ghost" aria-hidden="true">0</span>
+        </div>
+      </div>
+    </article>
+    <div class="clash-core" aria-hidden="true">
+      <span class="clash-bolt"></span>
+      <span class="clash-label">VS</span>
+    </div>
+    <article class="side side--lose">
+      <div class="side-frame">
+        <p class="side-tag">LOSE</p>
+        <div class="digit-cage">
+          <span class="mega-digit" data-counter="defeats">0</span>
+          <span class="digit-ghost" aria-hidden="true">0</span>
+        </div>
+      </div>
+    </article>
+    <div class="streak-banner" aria-hidden="true"></div>
+  </div>
+
+  <div class="preview-controls">
+    <button class="btn-victory" onclick="addVictory()">+ Victory</button>
+    <button class="btn-defeat" onclick="addDefeat()">+ Defeat</button>
+    <button class="btn-reset" onclick="resetAll()">Reset</button>
+    <div class="bg-selector">
+      <button class="bg-dark active" title="Dark" onclick="setBg(this, '#06030f')"></button>
+      <button class="bg-game1" title="Cool" onclick="setBg(this, 'linear-gradient(135deg, #1a1040, #06030f)')"></button>
+      <button class="bg-game2" title="Warm" onclick="setBg(this, 'linear-gradient(135deg, #401040, #100608)')"></button>
+      <button class="bg-bright" title="Bright" onclick="setBg(this, 'linear-gradient(135deg, #8090b0, #c0d0e8)')"></button>
+    </div>
+  </div>
+
+  <script>
+    let victories = 0;
+    let defeats = 0;
+    let _fakeEventSource = null;
+
+    window.EventSource = class FakeEventSource extends EventTarget {
+      constructor() {
+        super();
+        _fakeEventSource = this;
+        this.readyState = 1;
+      }
+      close() { this.readyState = 2; }
+    };
+
+    const _originalFetch = window.fetch;
+    window.fetch = (url, opts) => {
+      if (typeof url === "string" && url.includes("/api/status")) {
+        return Promise.resolve(new Response(JSON.stringify({
+          victories: 0, defeats: 0, draws: 0,
+          last_outcome: "", timestamp: 0,
+        }), { status: 200, headers: { "Content-Type": "application/json" } }));
+      }
+      return _originalFetch(url, opts);
+    };
+
+    function fireUpdate(outcome) {
+      const data = JSON.stringify({
+        victories, defeats, draws: 0,
+        last_outcome: outcome,
+        timestamp: Math.floor(Date.now() / 1000),
+      });
+      if (_fakeEventSource) {
+        _fakeEventSource.dispatchEvent(new MessageEvent("counter-update", { data }));
+      }
+    }
+
+    function addVictory() { victories++; fireUpdate("victory"); }
+    function addDefeat()  { defeats++;  fireUpdate("defeat"); }
+    function resetAll()   { victories = 0; defeats = 0; fireUpdate(""); }
+
+    function setBg(btn, value) {
+      document.querySelectorAll(".bg-selector button").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      document.body.style.background = value;
+    }
+  </script>
+  <script src="counter.js"></script>
+</body>
+</html>
