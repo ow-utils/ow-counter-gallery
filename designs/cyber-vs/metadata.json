@@ -3,6 +3,9 @@
   "slug": "cyber-vs",
   "description": "ネオンカラーのサイバー風 WIN vs LOSE カウンター。パルスリングやパーティクルエフェクト付き。",
   "author": "yukihane",
+  "author_url": "https://github.com/yukihane",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
   "tags": ["neon", "cyber", "animated", "versus"],
   "obs_size": { "width": 640, "height": 400 },
   "created": "2026-05-17"

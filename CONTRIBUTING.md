@@ -4,7 +4,9 @@
 
 ## ライセンス
 
-このリポジトリは [CC0 1.0](LICENSE) で公開されています。PR を送ることで、あなたのデザインも CC0（パブリックドメイン）として提供されることに同意したものとみなします。
+このリポジトリのギャラリーコードは [GNU GPL v3](LICENSE) で公開されています。
+
+デザイン（`designs/` 以下）は各 `metadata.json` に記載のライセンスが適用されます。PR を送る際は `metadata.json` に `license` と `license_url` を明記してください。指定がない場合は [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) として扱います。
 
 ## 前提知識
 
@@ -63,13 +65,39 @@
   "slug": "ディレクトリ名と同じスラッグ",
   "description": "デザインの簡単な説明",
   "author": "あなたの名前またはGitHubユーザー名",
+  "author_url": "https://github.com/yourname",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
   "tags": ["タグ1", "タグ2"],
   "obs_size": { "width": 640, "height": 400 },
   "created": "YYYY-MM-DD"
 }
 ```
 
+既存デザインを元に派生作品を作成した場合は `derived_from` を追加してください：
+
+```json
+{
+  "name": "My Design",
+  "slug": "my-design",
+  "description": "...",
+  "author": "あなたの名前",
+  "author_url": "https://github.com/yourname",
+  "derived_from": "cyber-vs",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "tags": [],
+  "obs_size": { "width": 640, "height": 400 },
+  "created": "YYYY-MM-DD"
+}
+```
+
+このリポジトリ外のデザインを元にした場合は、スラッグの代わりに元デザインの URL を指定してください。
+
 - `slug` はディレクトリ名と一致させてください
+- `author_url` は任意ですが、GitHub プロフィールや X などへのリンクを推奨します
+- `derived_from` は元デザインのスラッグ（同リポジトリ内）または URL（外部）を指定します
+- `license` / `license_url` は省略可能です。省略時は CC BY-SA 4.0 として扱います
 - `obs_size` は OBS ブラウザソースの推奨サイズです
 
 ## 手順
