@@ -21,7 +21,6 @@
 | `counter.html` | ○ | OBS に表示する HTML 本文 |
 | `counter.css` | ○ | スタイル |
 | `counter.js` | ○ | カウンター値の反映・アニメーション |
-| `preview.html` | ○ | ブラウザ単体で動作確認できるプレビュー |
 | `metadata.json` | ○ | デザインのメタデータ |
 | `screenshot.png` | - | ギャラリーやPR説明用のスクリーンショット |
 
@@ -50,11 +49,11 @@
 - 既存デザイン（`designs/cyber-vs/counter.js`）をベースにするのが簡単です
 - アニメーションやエフェクトは自由に変更できますが、値の取得・反映ロジックは壊さないでください
 
-### preview.html
+### プレビュー確認
 
-- ブラウザで直接開いてデザインを確認できる自己完結型の HTML です
-- `fetch` と `EventSource` をモックし、ボタンで勝敗を増減できるコントロールを含めてください
-- 既存デザイン（`designs/cyber-vs/preview.html`）をテンプレートとして使うのが簡単です
+デザインの動作確認は、カウンター本体 ([ow2-victory-counter](https://github.com/ow-utils/ow2-victory-counter)) の `assets/preview.html` を使って行います。詳しくは [how-to-customize-counter.md](https://github.com/ow-utils/ow2-victory-counter/blob/main/how-to-customize-counter.md) を参照してください。
+
+このリポジトリに `preview.html` を個別に作成する必要はありません。ギャラリーサイトの共有テンプレートが各デザインのファイルを自動的に読み込みます。
 
 ### metadata.json
 
@@ -79,7 +78,7 @@
 2. `designs/` に新しいディレクトリを作成する（例: `designs/my-design/`）
 3. 上記のファイルを配置する
 4. `designs/index.json` にスラッグを追加する
-5. `preview.html` をブラウザで開いて動作を確認する
+5. カウンター本体の `assets/preview.html` でデザインの動作を確認する
    - 勝敗ボタンで数値が増えること
    - アニメーションが動作すること
    - 背景が透過であること（暗い背景と明るい背景の両方で確認）
@@ -93,10 +92,11 @@
 
 ## 既存デザインをベースにする場合
 
-`designs/cyber-vs/` を丸ごとコピーしてからカスタマイズするのが最も簡単です。
+`designs/cyber-vs/` の `counter.html`, `counter.css`, `counter.js`, `metadata.json` をコピーしてからカスタマイズするのが最も簡単です（`preview.html` のコピーは不要です）。
 
 ```powershell
-Copy-Item -Recurse designs\cyber-vs designs\my-design
+mkdir designs\my-design
+Copy-Item designs\cyber-vs\counter.html, designs\cyber-vs\counter.css, designs\cyber-vs\counter.js, designs\cyber-vs\metadata.json designs\my-design\
 ```
 
 その後、各ファイルと `metadata.json` を編集してください。

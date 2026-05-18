@@ -248,7 +248,7 @@
 
       card.innerHTML = `
         <div class="card-preview" data-iframe-w="${iframeW}" data-iframe-h="${iframeH}">
-          <iframe src="designs/${design.slug}/preview.html" loading="lazy" sandbox="allow-scripts" width="${iframeW}" height="${iframeH}"></iframe>
+          <iframe src="designs/preview.html?design=${design.slug}&embed" loading="lazy" sandbox="allow-scripts allow-same-origin" width="${iframeW}" height="${iframeH}"></iframe>
         </div>
         <div class="card-body">
           <h2 class="card-name">${esc(design.name)}</h2>
@@ -260,7 +260,7 @@
             ${design.created ? `<span>${esc(design.created)}</span>` : ""}
           </div>
           <div class="card-actions">
-            <a class="btn btn-preview" href="designs/${design.slug}/preview.html" target="_blank">プレビュー</a>
+            <a class="btn btn-preview" href="designs/preview.html?design=${design.slug}" target="_blank">プレビュー</a>
             <a class="btn btn-source" href="https://github.com/ow-utils/ow-counter-gallery/tree/main/designs/${design.slug}" target="_blank">ソース</a>
           </div>
         </div>
