@@ -9,6 +9,7 @@
 | デザイン | 説明 | OBS 推奨サイズ |
 |---|---|---|
 | [Cyber VS](designs/cyber-vs/) | ネオンカラーのサイバー風 WIN vs LOSE カウンター | 640×400 |
+| [Wakukit-style](designs/wakukit-style/) | 角丸の白フレームに赤「勝」/青「敗」を並べたポップな勝敗カウンター | 720×320 |
 
 ## 使い方
 
@@ -17,7 +18,23 @@
 3. ow2-victory-counter の `assets/` フォルダに配置する
 4. OBS のブラウザソースを再読込する
 
-各デザインの `preview.html` をブラウザで開くと、OBS やアプリを起動せずにプレビューできます。
+## ローカルでギャラリーを動かす
+
+GitHub Pages 相当の表示をローカルで確認するには、リポジトリルートで静的 HTTP サーバを起動します（`fetch` を使うため `file://` 直開きでは動きません）。
+
+```bash
+# Python
+python3 -m http.server 8000
+# または Node
+npx --yes http-server -p 8000
+```
+
+ブラウザで開く:
+
+- ギャラリー一覧: <http://localhost:8000/>
+- 個別プレビュー: <http://localhost:8000/designs/preview.html?design=cyber-vs>
+
+プレビュー画面の下部に WIN / LOSE / Reset ボタンがあり、値の変化とアニメーションを確認できます。
 
 ## デザインを追加する
 

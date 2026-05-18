@@ -53,9 +53,27 @@
 
 ### プレビュー確認
 
-デザインの動作確認は、カウンター本体 ([ow2-victory-counter](https://github.com/ow-utils/ow2-victory-counter)) の `assets/preview.html` を使って行います。詳しくは [how-to-customize-counter.md](https://github.com/ow-utils/ow2-victory-counter/blob/main/how-to-customize-counter.md) を参照してください。
+このリポジトリには汎用プレビューページ `designs/preview.html` が用意されており、`?design={slug}` でデザインを指定して読み込みます。`fetch` を使うため、`file://` 直開きではなく静的 HTTP サーバ越しに開いてください。
 
-このリポジトリに `preview.html` を個別に作成する必要はありません。ギャラリーサイトの共有テンプレートが各デザインのファイルを自動的に読み込みます。
+リポジトリルートで以下を実行:
+
+```bash
+# Python
+python3 -m http.server 8000
+# または Node
+npx --yes http-server -p 8000
+```
+
+ブラウザで開く:
+
+- ギャラリー一覧: <http://localhost:8000/>
+- 個別プレビュー: <http://localhost:8000/designs/preview.html?design={your-slug}>
+
+プレビュー画面下部の WIN / LOSE / Reset ボタンで値とアニメーションを確認できます。
+
+サーバを立てずに確認したい場合は、カウンター本体 ([ow2-victory-counter](https://github.com/ow-utils/ow2-victory-counter)) の `assets/preview.html` を使う方法もあります。詳しくは [how-to-customize-counter.md](https://github.com/ow-utils/ow2-victory-counter/blob/main/how-to-customize-counter.md) を参照してください。
+
+このリポジトリに `preview.html` をデザインごとに作成する必要はありません。共有テンプレートが各デザインのファイルを自動的に読み込みます。
 
 ### metadata.json
 
