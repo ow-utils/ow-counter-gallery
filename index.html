@@ -255,7 +255,7 @@
           <p class="card-desc">${esc(design.description || "")}</p>
           ${tagsHtml ? `<div class="card-tags">${tagsHtml}</div>` : ""}
           <div class="card-meta">
-            ${design.author ? `<span>by ${esc(design.author)}</span>` : ""}
+            ${design.author ? `<span>by ${design.author_url ? `<a href="${esc(design.author_url)}" target="_blank" rel="noopener noreferrer" style="color:#7ab8ff;text-decoration:none;">${esc(design.author)}</a>` : esc(design.author)}</span>` : ""}
             ${obsSize ? `<span>OBS: ${obsSize}</span>` : ""}
             ${design.created ? `<span>${esc(design.created)}</span>` : ""}
           </div>
