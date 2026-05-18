@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OW2 Victory Counter — Design Gallery</title>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: #0c0c14;
+      color: #e0e0e8;
+      min-height: 100vh;
+    }
+
+    .header {
+      padding: 48px 24px 32px;
+      text-align: center;
+      background: linear-gradient(180deg, #14142a 0%, #0c0c14 100%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .header h1 {
+      margin: 0 0 8px;
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      background: linear-gradient(135deg, #00f5ff, #b388ff, #ff2bd6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header p {
+      margin: 0;
+      font-size: 15px;
+      color: #888;
+    }
+
+    .header a {
+      color: #7ab8ff;
+      text-decoration: none;
+    }
+
+    .header a:hover {
+      text-decoration: underline;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 24px;
+      padding: 32px 24px 64px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .card {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #16162a;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .card-preview {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      background: #06030f;
+      overflow: hidden;
+    }
+
+    .card-preview iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      pointer-events: none;
+    }
+
+    .card-preview .no-screenshot {
+      display: grid;
+      place-items: center;
+      width: 100%;
+      height: 100%;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .card-body {
+      padding: 16px 20px 20px;
+    }
+
+    .card-name {
+      margin: 0 0 6px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .card-desc {
+      margin: 0 0 12px;
+      font-size: 13px;
+      color: #999;
+      line-height: 1.5;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .tag {
+      padding: 2px 10px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 600;
+      background: rgba(179, 136, 255, 0.12);
+      color: #b388ff;
+      letter-spacing: 0.03em;
+    }
+
+    .card-meta {
+      display: flex;
+      gap: 16px;
+      font-size: 12px;
+      color: #666;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .btn {
+      padding: 7px 16px;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.15s;
+    }
+
+    .btn:hover {
+      opacity: 0.85;
+    }
+
+    .btn-preview {
+      background: #00f5ff;
+      color: #0c0c14;
+    }
+
+    .btn-source {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ccc;
+    }
+
+    .loading,
+    .error {
+      text-align: center;
+      padding: 64px 24px;
+      color: #666;
+    }
+
+    .error {
+      color: #ff6b6b;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>OW2 Victory Counter — Design Gallery</h1>
+    <p>
+      <a href="https://github.com/ow-utils/ow2-victory-counter">ow2-victory-counter</a>
+      のカスタムカウンターデザイン集
+    </p>
+  </div>
+
+  <div class="gallery" id="gallery">
+    <div class="loading">読み込み中...</div>
+  </div>
+
+  <script>
+    const gallery = document.getElementById("gallery");
+
+    async function loadGallery() {
+      try {
+        const res = await fetch("designs/index.json");
+        if (!res.ok) throw new Error("index.json の読み込みに失敗しました");
+        const slugs = await res.json();
+
+        const designs = await Promise.all(
+          slugs.map(async (slug) => {
+            const metaRes = await fetch(`designs/${slug}/metadata.json`);
+            if (!metaRes.ok) return null;
+            const meta = await metaRes.json();
+            meta.slug = slug;
+            return meta;
+          })
+        );
+
+        gallery.innerHTML = "";
+
+        const valid = designs.filter(Boolean);
+        if (valid.length === 0) {
+          gallery.innerHTML = '<div class="loading">デザインがまだありません</div>';
+          return;
+        }
+
+        for (const design of valid) {
+          gallery.appendChild(createCard(design));
+        }
+      } catch (e) {
+        gallery.innerHTML = `<div class="error">${e.message}</div>`;
+      }
+    }
+
+    function createCard(design) {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      const tagsHtml = (design.tags || [])
+        .map((t) => `<span class="tag">${esc(t)}</span>`)
+        .join("");
+
+      const obsSize = design.obs_size
+        ? `${design.obs_size.width}×${design.obs_size.height}`
+        : "";
+
+      card.innerHTML = `
+        <div class="card-preview">
+          <iframe src="designs/${design.slug}/preview.html" loading="lazy" sandbox="allow-scripts"></iframe>
+        </div>
+        <div class="card-body">
+          <h2 class="card-name">${esc(design.name)}</h2>
+          <p class="card-desc">${esc(design.description || "")}</p>
+          ${tagsHtml ? `<div class="card-tags">${tagsHtml}</div>` : ""}
+          <div class="card-meta">
+            ${design.author ? `<span>by ${esc(design.author)}</span>` : ""}
+            ${obsSize ? `<span>OBS: ${obsSize}</span>` : ""}
+            ${design.created ? `<span>${esc(design.created)}</span>` : ""}
+          </div>
+          <div class="card-actions">
+            <a class="btn btn-preview" href="designs/${design.slug}/preview.html" target="_blank">プレビュー</a>
+            <a class="btn btn-source" href="https://github.com/yukihane/ow-counter-gallery/tree/main/designs/${design.slug}" target="_blank">ソース</a>
+          </div>
+        </div>
+      `;
+
+      return card;
+    }
+
+    function esc(str) {
+      const d = document.createElement("div");
+      d.textContent = str;
+      return d.innerHTML;
+    }
+
+    loadGallery();
+  </script>
+</body>
+</html>

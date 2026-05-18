@@ -13,7 +13,8 @@ designs/
     preview.html          # ブラウザ単体で動作確認できるプレビュー
     metadata.json         # デザインのメタデータ
     screenshot.png        # プレビュー画像（任意）
-index.html                # GitHub Pages ギャラリーページ（予定）
+  index.json              # デザインスラッグの一覧（GitHub Pages 用）
+index.html                # GitHub Pages ギャラリーページ
 backup.sh                 # ow2-victory-counter-rs/assets/ からのバックアップ用
 ```
 
@@ -74,6 +75,7 @@ backup.sh                 # ow2-victory-counter-rs/assets/ からのバックア
 2. `counter.html`, `counter.css`, `counter.js`, `preview.html`, `metadata.json` を配置
 3. `preview.html` をブラウザで開いて動作確認
 4. 任意で `screenshot.png` を追加
+5. `designs/index.json` にスラッグを追加（ギャラリーページに表示するため）
 
 ## デザインの適用方法
 
