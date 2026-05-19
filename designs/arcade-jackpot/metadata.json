@@ -1,0 +1,12 @@
+{
+  "name": "Arcade Jackpot",
+  "slug": "arcade-jackpot",
+  "description": "ピクセル文字とマーキー電球が光るレトロアーケード/スロットマシン風。勝利でコインが弾けJACKPOT演出。",
+  "author": "umiinu",
+  "author_url": "https://x.com/umiinugaming",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "tags": ["arcade", "retro", "pixel", "slot", "animated"],
+  "obs_size": { "width": 652, "height": 372 },
+  "created": "2026-05-19"
+}

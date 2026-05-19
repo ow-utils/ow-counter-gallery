@@ -1,0 +1,12 @@
+{
+  "name": "Galaxy Burst",
+  "slug": "galaxy-burst",
+  "description": "宇宙空間に浮かぶブラックホールと惑星軌道。勝敗が確定すると流星群が走り超新星爆発のフラッシュが広がる。",
+  "author": "umiinu",
+  "author_url": "https://x.com/umiinugaming",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "tags": ["space", "galaxy", "supernova", "cosmic", "animated"],
+  "obs_size": { "width": 720, "height": 360 },
+  "created": "2026-05-19"
+}

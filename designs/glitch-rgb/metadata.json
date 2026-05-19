@@ -1,0 +1,12 @@
+{
+  "name": "Glitch RGB",
+  "slug": "glitch-rgb",
+  "description": "CRT/データモッシュ風の派手グリッチ。RGBずれ、スキャンライン、カタカナのコードレイン、更新時はバーが走る。",
+  "author": "umiinu",
+  "author_url": "https://x.com/umiinugaming",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "tags": ["glitch", "rgb", "cyberpunk", "crt", "animated"],
+  "obs_size": { "width": 700, "height": 380 },
+  "created": "2026-05-19"
+}

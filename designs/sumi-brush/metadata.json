@@ -1,0 +1,12 @@
+{
+  "name": "Sumi Brush",
+  "slug": "sumi-brush",
+  "description": "和紙に毛筆で書き殴る和風書道カウンター。勝利で桜が舞い、敗北で雷光が走る。朱印と墨飛沫の演出付き。",
+  "author": "umiinu",
+  "author_url": "https://x.com/umiinugaming",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "tags": ["japanese", "calligraphy", "sakura", "ink", "animated"],
+  "obs_size": { "width": 680, "height": 360 },
+  "created": "2026-05-19"
+}

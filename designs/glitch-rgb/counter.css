@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap');
+
+body { background: transparent; margin: 0; }
+
+.gx-screen {
+  position: relative;
+  width: 700px;
+  height: 380px;
+  margin: 0 auto;
+  background: #050008;
+  border: 2px solid #2a0033;
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: 'Share Tech Mono', monospace;
+  color: #e0e0ff;
+  box-shadow:
+    inset 0 0 60px rgba(180, 0, 220, 0.25),
+    0 0 30px rgba(120, 0, 180, 0.4);
+}
+
+.gx-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(180, 0, 220, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(180, 0, 220, 0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+
+.gx-scan {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    180deg,
+    transparent 0,
+    transparent 2px,
+    rgba(0, 0, 0, 0.25) 3px,
+    rgba(0, 0, 0, 0.25) 4px
+  );
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  animation: gx-scan-move 8s linear infinite;
+}
+@keyframes gx-scan-move { to { background-position: 0 200px; } }
+
+.gx-noise {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 13% 27%, rgba(255,255,255,0.06) 0, transparent 1px),
+    radial-gradient(circle at 67% 83%, rgba(255,255,255,0.06) 0, transparent 1px),
+    radial-gradient(circle at 33% 67%, rgba(255,255,255,0.05) 0, transparent 1px),
+    radial-gradient(circle at 91% 17%, rgba(255,255,255,0.05) 0, transparent 1px);
+  background-size: 6px 6px, 9px 9px, 7px 7px, 8px 8px;
+  opacity: 0.6;
+  animation: gx-noise 0.18s steps(4) infinite;
+  pointer-events: none;
+}
+@keyframes gx-noise {
+  0% { transform: translate(0,0); }
+  25% { transform: translate(-2px, 1px); }
+  50% { transform: translate(2px, -1px); }
+  75% { transform: translate(-1px, -2px); }
+  100% { transform: translate(1px, 2px); }
+}
+
+.gx-header,
+.gx-footer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  color: #b85aff;
+  border-bottom: 1px solid rgba(180, 50, 220, 0.3);
+  font-family: 'VT323', monospace;
+  z-index: 3;
+}
+.gx-footer {
+  border-bottom: 0;
+  border-top: 1px solid rgba(180, 50, 220, 0.3);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.gx-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ff2da8;
+  box-shadow: 0 0 8px #ff2da8;
+  animation: gx-blink 1.2s steps(2) infinite;
+}
+.gx-meta--right { margin-left: auto; color: #ff4080; }
+.gx-bar {
+  display: inline-block;
+  flex: 1;
+  height: 6px;
+  background: linear-gradient(90deg, #00f0ff, #ff00aa, #ffff00);
+  background-size: 200% 100%;
+  animation: gx-bar 2s linear infinite;
+}
+@keyframes gx-bar { to { background-position: -200% 0; } }
+.gx-blink { animation: gx-blink 1s steps(2) infinite; color: #00f0ff; }
+@keyframes gx-blink { 50% { opacity: 0; } }
+
+.gx-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 60px 1fr;
+  align-items: center;
+  height: calc(100% - 80px);
+  padding: 30px 24px;
+  z-index: 2;
+}
+
+.gx-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.gx-tag {
+  font-family: 'VT323', monospace;
+  font-size: 22px;
+  letter-spacing: 6px;
+}
+.gx-block--win .gx-tag { color: #00f5ff; text-shadow: 0 0 10px #00f5ff; }
+.gx-block--lose .gx-tag { color: #ff2da8; text-shadow: 0 0 10px #ff2da8; }
+
+.gx-num {
+  position: relative;
+  line-height: 1;
+}
+.gx-num-text {
+  position: relative;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 130px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -2px;
+  text-shadow:
+    -3px 0 #ff00aa,
+    3px 0 #00f0ff;
+  animation: gx-rgb-idle 4s steps(8) infinite;
+}
+.gx-num-text::before,
+.gx-num-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.gx-num-text::before {
+  color: #ff00aa;
+  transform: translate(-2px, 0);
+  clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+  mix-blend-mode: screen;
+}
+.gx-num-text::after {
+  color: #00f0ff;
+  transform: translate(2px, 0);
+  clip-path: polygon(0 66%, 100% 66%, 100% 100%, 0 100%);
+  mix-blend-mode: screen;
+}
+@keyframes gx-rgb-idle {
+  0%, 90%, 100% { text-shadow: -3px 0 #ff00aa, 3px 0 #00f0ff; }
+  10% { text-shadow: -6px 0 #ff00aa, 6px 0 #00f0ff; transform: translateX(2px); }
+  20% { text-shadow: -1px 0 #ff00aa, 1px 0 #00f0ff; }
+  50% { text-shadow: -4px 1px #ff00aa, 4px -1px #00f0ff; }
+}
+
+.gx-num-text.gx-burst {
+  animation: gx-burst 0.7s steps(7);
+}
+@keyframes gx-burst {
+  0% { transform: translate(0,0); filter: hue-rotate(0); text-shadow: -3px 0 #ff00aa, 3px 0 #00f0ff; }
+  20% { transform: translate(-12px, 4px) skewX(8deg); filter: hue-rotate(60deg) invert(0.2); text-shadow: -18px 0 #ff00aa, 18px 0 #00f0ff, 0 0 20px #fff; }
+  40% { transform: translate(10px, -3px) skewX(-6deg); filter: hue-rotate(-90deg); text-shadow: -12px 0 #ff00aa, 12px 0 #00f0ff, 0 0 30px #ffff00; }
+  60% { transform: translate(-4px, 6px); filter: hue-rotate(120deg) saturate(2); }
+  80% { transform: translate(6px, -2px); filter: hue-rotate(0); }
+  100% { transform: translate(0,0); }
+}
+
+.gx-divider {
+  font-family: 'VT323', monospace;
+  font-size: 38px;
+  color: rgba(180, 50, 220, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 0;
+  text-shadow: 0 0 12px #b832ff;
+}
+
+.gx-rain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0.35;
+  font-family: 'VT323', monospace;
+  font-size: 14px;
+  color: #00ff80;
+  z-index: 1;
+}
+.gx-rain-col {
+  position: absolute;
+  top: -100%;
+  width: 14px;
+  text-align: center;
+  white-space: pre;
+  line-height: 1;
+  text-shadow: 0 0 6px currentColor;
+}
+
+.gx-flash {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  opacity: 0;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  z-index: 5;
+}
+.gx-flash.gx-active {
+  animation: gx-flash 0.4s steps(5);
+}
+@keyframes gx-flash {
+  0%, 100% { opacity: 0; }
+  20% { opacity: 0.8; }
+  40% { opacity: 0.2; background: #ff00aa; }
+  60% { opacity: 0.7; background: #00f0ff; }
+  80% { opacity: 0.3; background: #ffff00; }
+}
+
+.gx-glitch-bars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+.gx-bar-strip {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 12px;
+  background: rgba(255, 0, 170, 0.35);
+  mix-blend-mode: screen;
+}
