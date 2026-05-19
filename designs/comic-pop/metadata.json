@@ -1,0 +1,12 @@
+{
+  "name": "Comic Pop",
+  "slug": "comic-pop",
+  "description": "アメコミ/ポップアート風のド派手カウンター。ハーフトーンドット、太い黒縁、傾いた巨大数字。勝敗確定時に POW! BAM! などのバーストとスター飛散、ページ全体が揺れる。",
+  "author": "umiinu",
+  "author_url": "https://x.com/umiinugaming",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "tags": ["comic", "popart", "halftone", "bold", "animated"],
+  "obs_size": { "width": 720, "height": 400 },
+  "created": "2026-05-19"
+}

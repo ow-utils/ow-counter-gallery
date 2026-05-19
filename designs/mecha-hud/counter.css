@@ -1,0 +1,263 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Share+Tech+Mono&display=swap');
+
+body { background: transparent; margin: 0; }
+
+.mh-cockpit {
+  position: relative;
+  box-sizing: border-box;
+  width: 720px;
+  height: 380px;
+  margin: 0 auto;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(0, 80, 60, 0.5), transparent 70%),
+    linear-gradient(180deg, #02100a 0%, #050a14 100%);
+  border: 3px solid #00ff95;
+  border-radius: 4px;
+  overflow: hidden;
+  font-family: 'Orbitron', sans-serif;
+  color: #b8ffe2;
+  box-shadow:
+    inset 0 0 60px rgba(0, 255, 150, 0.25),
+    0 0 30px rgba(0, 255, 150, 0.4);
+}
+
+.mh-frame { position: absolute; inset: 0; pointer-events: none; }
+.mh-corner {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  border: 4px solid #00ff95;
+  filter: drop-shadow(0 0 6px #00ff95);
+}
+.mh-corner--tl { top: 8px; left: 8px; border-right: 0; border-bottom: 0; }
+.mh-corner--tr { top: 8px; right: 8px; border-left: 0; border-bottom: 0; }
+.mh-corner--bl { bottom: 8px; left: 8px; border-right: 0; border-top: 0; }
+.mh-corner--br { bottom: 8px; right: 8px; border-left: 0; border-top: 0; }
+
+.mh-warn-stripes {
+  position: absolute;
+  left: 60px;
+  right: 60px;
+  height: 14px;
+  background: repeating-linear-gradient(135deg, #ffd000 0 12px, #1a1200 12px 24px);
+  opacity: 0.85;
+}
+.mh-warn-stripes--top { top: 12px; }
+.mh-warn-stripes--bot { bottom: 12px; }
+
+.mh-radar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 260px;
+  height: 260px;
+  margin: -130px 0 0 -130px;
+  pointer-events: none;
+  opacity: 0.5;
+}
+.mh-radar-ring {
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid rgba(0, 255, 150, 0.45);
+  border-radius: 50%;
+}
+.mh-radar-ring--mid { inset: 25%; opacity: 0.7; }
+.mh-radar-ring--inner { inset: 42%; opacity: 0.85; }
+.mh-radar-sweep {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: 4px;
+  margin-top: -2px;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 150, 0.9));
+  transform-origin: left center;
+  animation: mh-sweep 3s linear infinite;
+}
+@keyframes mh-sweep { to { transform: rotate(360deg); } }
+.mh-radar-blip {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00ff95;
+  box-shadow: 0 0 8px #00ff95;
+  animation: mh-blip 2.5s ease-in-out infinite;
+}
+.mh-radar-blip--a { top: 28%; left: 70%; animation-delay: 0.4s; }
+.mh-radar-blip--b { top: 70%; left: 25%; animation-delay: 1.6s; background: #ff3060; box-shadow: 0 0 8px #ff3060; }
+@keyframes mh-blip { 0%, 70%, 100% { opacity: 0; } 30%, 60% { opacity: 1; } }
+
+.mh-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100%;
+  padding: 40px 44px;
+  gap: 28px;
+  align-items: center;
+}
+
+.mh-bay {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.mh-bay-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.mh-dot {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}
+.mh-dot--on { background: #00ff95; box-shadow: 0 0 14px #00ff95; animation: mh-dot 1.4s ease-in-out infinite; }
+.mh-dot--off { background: #ff3060; box-shadow: 0 0 14px #ff3060; animation: mh-dot 1s ease-in-out infinite; }
+@keyframes mh-dot { 50% { opacity: 0.3; } }
+
+.mh-tag {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 800;
+  font-size: 30px;
+  letter-spacing: 10px;
+  color: #00ff95;
+  text-shadow: 0 0 12px #00ff95;
+}
+.mh-bay--lose .mh-tag { color: #ff3060; text-shadow: 0 0 12px #ff3060; }
+
+.mh-reticle {
+  position: relative;
+  width: 240px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mh-reticle-arm {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border: 4px solid #00ff95;
+  filter: drop-shadow(0 0 6px #00ff95);
+}
+.mh-reticle--red .mh-reticle-arm { border-color: #ff3060; filter: drop-shadow(0 0 6px #ff3060); }
+.mh-reticle-arm--tl { top: 0; left: 0; border-right: 0; border-bottom: 0; }
+.mh-reticle-arm--tr { top: 0; right: 0; border-left: 0; border-bottom: 0; }
+.mh-reticle-arm--bl { bottom: 0; left: 0; border-right: 0; border-top: 0; }
+.mh-reticle-arm--br { bottom: 0; right: 0; border-left: 0; border-top: 0; }
+.mh-reticle::before,
+.mh-reticle::after {
+  content: '';
+  position: absolute;
+  background: rgba(0, 255, 150, 0.35);
+}
+.mh-reticle::before { left: 50%; top: -10px; width: 2px; height: 14px; margin-left: -1px; }
+.mh-reticle::after { top: 50%; left: -10px; height: 2px; width: 14px; margin-top: -1px; }
+.mh-reticle--red::before,
+.mh-reticle--red::after { background: rgba(255, 48, 96, 0.45); }
+
+.mh-num {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: 180px;
+  line-height: 1;
+  color: #fff;
+  text-shadow:
+    0 0 18px #00ff95,
+    0 0 36px rgba(0, 255, 150, 0.7),
+    0 0 60px rgba(0, 255, 150, 0.45);
+}
+.mh-bay--lose .mh-num {
+  text-shadow:
+    0 0 18px #ff3060,
+    0 0 36px rgba(255, 48, 96, 0.7),
+    0 0 60px rgba(255, 48, 96, 0.45);
+}
+
+.mh-banner {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0;
+  transform: translateY(-50%);
+}
+.mh-banner-text {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: 56px;
+  letter-spacing: 8px;
+  padding: 16px 40px;
+  background: rgba(0, 30, 18, 0.85);
+  border: 3px solid #00ff95;
+  color: #b8ffe2;
+  text-shadow: 0 0 16px #00ff95;
+  box-shadow: 0 0 30px rgba(0, 255, 150, 0.6), inset 0 0 30px rgba(0, 255, 150, 0.3);
+  white-space: nowrap;
+}
+.mh-cockpit.mh-fx-lose .mh-banner-text {
+  background: rgba(40, 0, 8, 0.85);
+  border-color: #ff3060;
+  color: #ffd0d8;
+  text-shadow: 0 0 16px #ff3060;
+  box-shadow: 0 0 30px rgba(255, 48, 96, 0.6), inset 0 0 30px rgba(255, 48, 96, 0.3);
+}
+.mh-cockpit.mh-fx-win .mh-banner,
+.mh-cockpit.mh-fx-lose .mh-banner {
+  animation: mh-banner 1.4s cubic-bezier(.2,1.2,.4,1);
+}
+@keyframes mh-banner {
+  0% { opacity: 0; transform: translateY(-50%) scale(0.4) skewX(-20deg); }
+  25% { opacity: 1; transform: translateY(-50%) scale(1.1) skewX(0); }
+  75% { opacity: 1; transform: translateY(-50%) scale(1) skewX(0); }
+  100% { opacity: 0; transform: translateY(-50%) scale(1.05) skewX(8deg); }
+}
+
+.mh-strobe {
+  position: absolute;
+  inset: 0;
+  background: #ff3060;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 4;
+  mix-blend-mode: screen;
+}
+.mh-cockpit.mh-fx-lose .mh-strobe {
+  animation: mh-strobe 0.7s steps(4);
+}
+.mh-cockpit.mh-fx-win .mh-strobe {
+  animation: mh-strobe-w 0.5s steps(3);
+}
+@keyframes mh-strobe {
+  0%, 100% { opacity: 0; }
+  20% { opacity: 0.6; }
+  50% { opacity: 0; }
+  70% { opacity: 0.4; }
+}
+@keyframes mh-strobe-w {
+  0%, 100% { opacity: 0; }
+  30% { opacity: 0.5; background: #00ff95; }
+  70% { opacity: 0.2; }
+}
+
+.mh-num.mh-lock {
+  animation: mh-lock 0.9s cubic-bezier(.2,1.4,.4,1);
+}
+@keyframes mh-lock {
+  0% { transform: scale(0.4); opacity: 0; filter: blur(8px); }
+  40% { transform: scale(1.5); opacity: 1; filter: blur(0); }
+  70% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}

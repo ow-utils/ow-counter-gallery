@@ -1,0 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Anton&display=swap');
+
+body { background: transparent; margin: 0; }
+
+.cp-page {
+  position: relative;
+  box-sizing: border-box;
+  width: 720px;
+  height: 400px;
+  margin: 0 auto;
+  background: #ffe22e;
+  border: 8px solid #0a0a0a;
+  border-radius: 16px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 110px 1fr;
+  align-items: center;
+  font-family: 'Bangers', 'Anton', sans-serif;
+  box-shadow: 8px 8px 0 #0a0a0a, 0 0 0 4px #ff2a2a inset;
+}
+
+.cp-halftone {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, #0a0a0a 1.6px, transparent 2px);
+  background-size: 14px 14px;
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+.cp-rays {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 180%;
+  height: 180%;
+  margin: -90% 0 0 -90%;
+  background:
+    repeating-conic-gradient(
+      from 0deg,
+      rgba(255, 255, 255, 0.45) 0deg 8deg,
+      transparent 8deg 20deg
+    );
+  pointer-events: none;
+  animation: cp-spin 22s linear infinite;
+  opacity: 0.55;
+}
+@keyframes cp-spin { to { transform: rotate(360deg); } }
+
+.cp-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  z-index: 2;
+}
+
+.cp-bubble {
+  font-family: 'Bangers', sans-serif;
+  font-size: 40px;
+  letter-spacing: 4px;
+  padding: 6px 22px 4px;
+  background: #fff;
+  border: 4px solid #0a0a0a;
+  border-radius: 24px;
+  color: #0a0a0a;
+  transform: rotate(-4deg);
+  box-shadow: 4px 4px 0 #0a0a0a;
+  position: relative;
+}
+.cp-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -16px;
+  left: 30%;
+  width: 22px;
+  height: 22px;
+  background: #fff;
+  border-right: 4px solid #0a0a0a;
+  border-bottom: 4px solid #0a0a0a;
+  transform: rotate(35deg);
+}
+.cp-bubble--lose {
+  transform: rotate(5deg);
+  background: #ff5555;
+  color: #fff;
+  -webkit-text-stroke: 2px #0a0a0a;
+}
+.cp-bubble--lose::after {
+  background: #ff5555;
+  left: auto;
+  right: 30%;
+  transform: rotate(45deg);
+}
+.cp-bubble--win {
+  background: #34d3ff;
+}
+
+.cp-num {
+  font-family: 'Anton', 'Bangers', sans-serif;
+  font-size: 200px;
+  font-weight: 900;
+  line-height: 1;
+  color: #fff;
+  -webkit-text-stroke: 5px #0a0a0a;
+  text-shadow:
+    7px 7px 0 #0a0a0a,
+    -2px -2px 0 #0a0a0a,
+    0 0 0 #0a0a0a;
+  letter-spacing: -4px;
+  transform: rotate(-3deg);
+}
+.cp-num--lose {
+  color: #ff5555;
+  transform: rotate(4deg);
+  text-shadow:
+    7px 7px 0 #0a0a0a,
+    -2px -2px 0 #0a0a0a;
+}
+
+.cp-divider {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+.cp-vs {
+  font-family: 'Bangers', sans-serif;
+  font-size: 68px;
+  color: #fff;
+  -webkit-text-stroke: 4px #0a0a0a;
+  text-shadow: 6px 6px 0 #0a0a0a;
+  background: #ff2a2a;
+  padding: 8px 14px 2px;
+  border: 5px solid #0a0a0a;
+  transform: rotate(-8deg);
+  box-shadow: 5px 5px 0 #0a0a0a;
+}
+
+.cp-burst {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 6;
+  pointer-events: none;
+  opacity: 0;
+}
+.cp-burst-text {
+  display: inline-block;
+  font-family: 'Bangers', sans-serif;
+  font-size: 96px;
+  letter-spacing: 6px;
+  color: #ffe22e;
+  -webkit-text-stroke: 6px #0a0a0a;
+  text-shadow: 8px 8px 0 #0a0a0a;
+  padding: 20px 36px 14px;
+  background: #ff2a2a;
+  border: 6px solid #0a0a0a;
+  clip-path: polygon(
+    0% 12%, 8% 0%, 18% 14%, 28% 2%, 40% 16%, 52% 0%,
+    62% 14%, 74% 2%, 86% 16%, 100% 6%,
+    96% 22%, 100% 36%, 92% 50%, 100% 64%, 96% 78%, 100% 94%,
+    88% 88%, 78% 100%, 66% 86%, 54% 100%, 42% 86%,
+    30% 100%, 18% 86%, 6% 100%, 0% 88%,
+    8% 74%, 0% 60%, 8% 46%, 0% 32%
+  );
+  white-space: nowrap;
+}
+.cp-page.cp-fx-win .cp-burst-text { background: #34d3ff; color: #ffe22e; }
+.cp-page.cp-fx-lose .cp-burst-text { background: #ff2a2a; color: #fff; }
+.cp-page.cp-fx-win .cp-burst,
+.cp-page.cp-fx-lose .cp-burst {
+  animation: cp-burst 1.3s cubic-bezier(.2, 1.4, .3, 1);
+}
+@keyframes cp-burst {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0) rotate(-25deg); }
+  35% { opacity: 1; transform: translate(-50%, -50%) scale(1.2) rotate(8deg); }
+  60% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(-4deg); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.1) rotate(2deg); }
+}
+
+.cp-stars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+.cp-star {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  background: #fff;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  filter: drop-shadow(2px 2px 0 #0a0a0a);
+}
+
+.cp-num.cp-pop {
+  animation: cp-pop 0.8s cubic-bezier(.2, 1.5, .3, 1);
+}
+@keyframes cp-pop {
+  0% { transform: rotate(-3deg) scale(0.4); opacity: 0; }
+  40% { transform: rotate(8deg) scale(1.5); opacity: 1; }
+  70% { transform: rotate(-6deg) scale(0.9); }
+  100% { transform: rotate(-3deg) scale(1); }
+}
+.cp-num--lose.cp-pop {
+  animation-name: cp-pop-l;
+}
+@keyframes cp-pop-l {
+  0% { transform: rotate(4deg) scale(0.4); opacity: 0; }
+  40% { transform: rotate(-10deg) scale(1.5); opacity: 1; }
+  70% { transform: rotate(8deg) scale(0.9); }
+  100% { transform: rotate(4deg) scale(1); }
+}
+
+.cp-page.cp-shake {
+  animation: cp-shake 0.4s ease-in-out;
+}
+@keyframes cp-shake {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(-6px, 3px); }
+  40% { transform: translate(5px, -2px); }
+  60% { transform: translate(-3px, -4px); }
+  80% { transform: translate(4px, 2px); }
+}
