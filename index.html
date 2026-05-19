@@ -14,16 +14,20 @@
     body {
       margin: 0;
       font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
-      background: #0c0c14;
-      color: #e0e0e8;
+      background:
+        radial-gradient(ellipse at top, rgba(249, 158, 26, 0.12), transparent 55%),
+        radial-gradient(ellipse at bottom right, rgba(33, 143, 254, 0.12), transparent 55%),
+        linear-gradient(180deg, #1c2230 0%, #141925 100%);
+      background-attachment: fixed;
+      color: #f0e9d6;
       min-height: 100vh;
     }
 
     .header {
       padding: 48px 24px 32px;
       text-align: center;
-      background: linear-gradient(180deg, #14142a 0%, #0c0c14 100%);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      background: linear-gradient(180deg, rgba(249, 158, 26, 0.18) 0%, rgba(33, 143, 254, 0.08) 60%, transparent 100%);
+      border-bottom: 1px solid rgba(249, 158, 26, 0.25);
     }
 
     .header h1 {
@@ -31,7 +35,7 @@
       font-size: clamp(24px, 4vw, 36px);
       font-weight: 700;
       letter-spacing: 0.02em;
-      background: linear-gradient(135deg, #00f5ff, #b388ff, #ff2bd6);
+      background: linear-gradient(135deg, #f99e1a 0%, #ffd166 35%, #44e7ff 75%, #218ffe 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -40,16 +44,17 @@
     .header p {
       margin: 0;
       font-size: 15px;
-      color: #888;
+      color: #c9c2af;
     }
 
     .header a {
-      color: #7ab8ff;
+      color: #f9b94a;
       text-decoration: none;
     }
 
     .header a:hover {
       text-decoration: underline;
+      color: #ffd166;
     }
 
     .header .github-link {
@@ -57,13 +62,13 @@
       align-items: center;
       justify-content: center;
       margin-top: 16px;
-      color: #888;
+      color: #c9c2af;
       text-decoration: none;
       transition: color 0.2s;
     }
 
     .header .github-link:hover {
-      color: #e0e0e8;
+      color: #f99e1a;
       text-decoration: none;
     }
 
@@ -85,20 +90,21 @@
       position: relative;
       border-radius: 16px;
       overflow: hidden;
-      background: #16162a;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      transition: transform 0.2s, box-shadow 0.2s;
+      background: linear-gradient(180deg, #232a3a 0%, #1b212e 100%);
+      border: 1px solid rgba(249, 158, 26, 0.18);
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
     }
 
     .card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 14px 44px rgba(0, 0, 0, 0.55), 0 0 24px rgba(249, 158, 26, 0.2);
+      border-color: rgba(249, 158, 26, 0.5);
     }
 
     .card-preview {
       position: relative;
       width: 100%;
-      background: #06030f;
+      background: #0e1320;
       overflow: hidden;
     }
 
@@ -116,7 +122,7 @@
       width: 100%;
       height: 100%;
       font-size: 14px;
-      color: #555;
+      color: #6a7080;
     }
 
     .card-body {
@@ -126,13 +132,14 @@
     .card-name {
       margin: 0 0 6px;
       font-size: 18px;
-      font-weight: 600;
+      font-weight: 700;
+      color: #fff5e0;
     }
 
     .card-desc {
       margin: 0 0 12px;
       font-size: 13px;
-      color: #999;
+      color: #b8b1a0;
       line-height: 1.5;
     }
 
@@ -148,16 +155,17 @@
       border-radius: 99px;
       font-size: 11px;
       font-weight: 600;
-      background: rgba(179, 136, 255, 0.12);
-      color: #b388ff;
+      background: rgba(249, 158, 26, 0.16);
+      color: #ffc265;
       letter-spacing: 0.03em;
+      border: 1px solid rgba(249, 158, 26, 0.3);
     }
 
     .card-meta {
       display: flex;
       gap: 16px;
       font-size: 12px;
-      color: #666;
+      color: #8a8472;
     }
 
     .card-actions {
@@ -171,35 +179,47 @@
       border: none;
       border-radius: 8px;
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       text-decoration: none;
-      transition: opacity 0.15s;
+      transition: opacity 0.15s, transform 0.1s, box-shadow 0.2s;
+      letter-spacing: 0.02em;
     }
 
     .btn:hover {
-      opacity: 0.85;
+      opacity: 0.92;
+      transform: translateY(-1px);
     }
 
     .btn-preview {
-      background: #00f5ff;
-      color: #0c0c14;
+      background: linear-gradient(135deg, #f99e1a 0%, #ffb84d 100%);
+      color: #1a1208;
+      box-shadow: 0 0 0 1px rgba(255, 200, 100, 0.4), 0 4px 14px rgba(249, 158, 26, 0.35);
+    }
+
+    .btn-preview:hover {
+      box-shadow: 0 0 0 1px rgba(255, 200, 100, 0.6), 0 6px 18px rgba(249, 158, 26, 0.55);
     }
 
     .btn-source {
-      background: rgba(255, 255, 255, 0.1);
-      color: #ccc;
+      background: rgba(33, 143, 254, 0.18);
+      color: #9fcfff;
+      border: 1px solid rgba(33, 143, 254, 0.35);
+    }
+
+    .btn-source:hover {
+      background: rgba(33, 143, 254, 0.3);
     }
 
     .loading,
     .error {
       text-align: center;
       padding: 64px 24px;
-      color: #666;
+      color: #8a8472;
     }
 
     .error {
-      color: #ff6b6b;
+      color: #ff8a6b;
     }
   </style>
 </head>
@@ -281,7 +301,7 @@
           <p class="card-desc">${esc(design.description || "")}</p>
           ${tagsHtml ? `<div class="card-tags">${tagsHtml}</div>` : ""}
           <div class="card-meta">
-            ${design.author ? `<span>by ${design.author_url ? `<a href="${esc(design.author_url)}" target="_blank" rel="noopener noreferrer" style="color:#7ab8ff;text-decoration:none;">${esc(design.author)}</a>` : esc(design.author)}</span>` : ""}
+            ${design.author ? `<span>by ${design.author_url ? `<a href="${esc(design.author_url)}" target="_blank" rel="noopener noreferrer" style="color:#9fcfff;text-decoration:none;">${esc(design.author)}</a>` : esc(design.author)}</span>` : ""}
             ${obsSize ? `<span>OBS: ${obsSize}</span>` : ""}
             ${design.created ? `<span>${esc(design.created)}</span>` : ""}
           </div>
