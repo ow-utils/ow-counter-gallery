@@ -4,13 +4,6 @@
 
 **ギャラリー:** https://ow-utils.github.io/ow-counter-gallery/
 
-## デザイン一覧
-
-| デザイン | 説明 | OBS 推奨サイズ |
-|---|---|---|
-| [Cyber VS](designs/cyber-vs/) | ネオンカラーのサイバー風 WIN vs LOSE カウンター | 640×400 |
-| [Wakukit-style](designs/wakukit-style/) | 角丸の白フレームに赤「勝」/青「敗」を並べたポップな勝敗カウンター | 720×320 |
-
 ## 使い方
 
 1. ギャラリーページまたは `designs/` から好みのデザインを選ぶ
