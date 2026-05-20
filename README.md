@@ -37,7 +37,7 @@ npx --yes http-server -p 8000
 
 このリポジトリは二層のライセンス構成になっています。
 
-- **ギャラリーのコード**（`designs/` 以外）: [GNU GPL v3](LICENSE)
+- **ギャラリーのコード**（`designs/` 以外）: [GNU AGPL v3 or later](LICENSE)
 - **デザイン**（`designs/` 以下）: 各デザインの `metadata.json` に記載（[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) を基本とします）
 
 デザインを使用・改変・再配布する際は、著作者のクレジット表示と同一ライセンスでの公開が必要です。

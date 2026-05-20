@@ -4,7 +4,7 @@
 
 ## ライセンス
 
-このリポジトリのギャラリーコードは [GNU GPL v3](LICENSE) で公開されています。
+このリポジトリのギャラリーコードは [GNU AGPL v3 or later](LICENSE) で公開されています。
 
 デザイン（`designs/` 以下）は各 `metadata.json` に記載のライセンスが適用されます。PR を送る際は `metadata.json` に `license` と `license_url` を明記してください。指定がない場合は [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) として扱います。
 
