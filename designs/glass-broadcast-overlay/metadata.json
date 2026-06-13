@@ -1,0 +1,12 @@
+{
+  "name": "Glass Broadcast Overlay",
+  "slug": "glass-broadcast-overlay",
+  "description": "FHD前提の透明ガラスUI風スコアオーバーレイ。通常時は左上に小さく勝敗を表示し、勝敗確定時だけ全画面の反射ラインと中央パネルでカウントアップする。",
+  "author": "umiinu",
+  "author_url": "https://x.com/umiinugaming",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "tags": ["glass", "broadcast", "overlay", "fhd", "animated"],
+  "obs_size": { "width": 1920, "height": 1080 },
+  "created": "2026-06-14"
+}
